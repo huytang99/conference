@@ -1,8 +1,9 @@
-from app import app, db, queue_client
+from app import app, db, conn_str, servicebus_qname
 from datetime import datetime
 from app.models import Attendee, Conference, Notification
 from flask import render_template, session, request, redirect, url_for, flash, make_response, session
-from azure.servicebus import Message
+#from azure.servicebus import Message
+from azure.servicebus import ServiceBusClient, ServiceBusMessage
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import logging
@@ -75,7 +76,7 @@ def notification():
 
             # for attendee in attendees:
             #     subject = '{}: {}'.format(attendee.first_name, notification.subject)
-            #     # send_email(attendee.email, subject, notification.message)
+            #     send_email(attendee.email, subject, notification.message)
 
             # notification.completed_date = datetime.utcnow()
             # notification.status = 'Notified {} attendees'.format(len(attendees))
@@ -91,8 +92,8 @@ def notification():
             #################################################
 
             return redirect('/Notifications')
-        except :
-            logging.error('log unable to save notification')
+        except Exception as e:
+            logging.error(f"log unable to save notification: {e}")
 
     else:
         return render_template('notification.html')
