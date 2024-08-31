@@ -3,7 +3,7 @@ astroid==2.4.1
 azure-common==1.1.25
 azure-core==1.15.0
 azure-functions==1.7.2
-azure-servicebus==0.21.1
+azure-servicebus==0.20.1
 certifi==2020.4.5.1
 cffi==1.15.0
 chardet==3.0.4

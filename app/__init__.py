@@ -13,5 +13,3 @@ conn_str = app.config.get('SERVICE_BUS_CONNECTION_STRING')
 servicebus_qname = app.config.get('SERVICE_BUS_QUEUE_NAME')
 
 db = SQLAlchemy(app)
-
-from . import routes
